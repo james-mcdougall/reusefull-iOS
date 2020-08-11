@@ -26,11 +26,7 @@ class SearchCollectionViewCell: UICollectionViewCell {
         categoryLabel.text = category.name
         categoryImage.image = category.image
         DispatchQueue.main.async {
-            self.layer.cornerRadius = 25
-            self.layer.shadowColor = UIColor.black.cgColor
-            self.layer.shadowRadius = 10
-            self.layer.shadowOpacity = 0.8
-            self.layer.shadowOffset = CGSize(width: 10, height: 10)
+            self.categoryImage.layer.masksToBounds = true
         }
     }
     

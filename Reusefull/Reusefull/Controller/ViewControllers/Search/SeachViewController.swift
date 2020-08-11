@@ -11,11 +11,13 @@ import UIKit
 class SeachViewController: UIViewController {
     
     //MARK: - IBOutlets
+    @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
     //MARK: - UI Properties
     let customUI = CustomUI()
+    let cellScale: CGFloat = 0.6
     
     //MARK: - Funtional Properties
     let searchCollectionViewCell = "SearchCollectionViewCell"
@@ -24,8 +26,15 @@ class SeachViewController: UIViewController {
     //MARK: Lifecycle Views
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureUI()
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    //MARK: - Helper Methods
+    
+    func configureUI() {        
+        userImage.layer.cornerRadius = userImage.frame.size.height / 2
     }
     
     //MARK: - Navigation
@@ -48,15 +57,13 @@ extension SeachViewController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: searchCollectionViewCell, for: indexPath) as? SearchCollectionViewCell else { return UICollectionViewCell() }
         let categoryCell = categoryController.categories[indexPath.item]
         cell.category = categoryCell
-        
-        
-        
-        
-        
+        DispatchQueue.main.async {
+            cell.layer.cornerRadius = 25
+            cell.layer.borderWidth = 1
+            cell.layer.borderColor = UIColor.black.cgColor
+        }
         return cell
     }
-    
-    
 }
 
 
